@@ -43,3 +43,11 @@ db/development.sqlite3`
 |   up  | 20171123185902   | Create book    |
 |   up  |   20171128211826 |  Drop books    |
 |   up  |  20171128211937  | Create authors |
+
+
+* Now we need to update the books#index method that returns the json response to include the from
+```render  json: books``` to
+```render  json: books.as_json(include: :author, only: [:name])```; __:include__ allows us to load nested relationships in a hash that can provided in the render phase of the instance variable.
+
+
+*
