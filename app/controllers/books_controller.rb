@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
     books = Book.all
-    render  json: books.as_json(include: :author, only: [:name])
+    render :json => books.to_json(except: [:authors_id], :include => :author)
   end
 end

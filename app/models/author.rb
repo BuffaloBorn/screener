@@ -1,8 +1,8 @@
-class Authors < ActiveRecord::Base
-  attr_accessible :f_name, :l_name
+class Author < ActiveRecord::Base
+  attr_accessible :f_name, :l_name, :name
 
-  def self.name
-    "#{f_name} #{l_name}"
+  def name
+    "#{:f_name} #{:l_name}"
   end
 
   validates :f_name, presence: true, length: { maximum: 255 }

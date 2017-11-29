@@ -40,3 +40,5 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+gem 'test-unit', '~> 3.0'

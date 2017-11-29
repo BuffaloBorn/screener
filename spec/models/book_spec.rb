@@ -22,37 +22,26 @@ RSpec.describe 'Book' do
           expect(book.errors.keys).to include(:title)
         end
       end
-    end
 
-    describe '#author' do
-      context 'not present' do
-        let(:author) { nil }
+      context 'under 255 characters with author_id is null' do
+        let(:title) { 'x'*254 }
+        let(:author_id) { nil }
 
         it 'is invalid' do
-          book = Book.new(author: author)
-          expect(book.valid?).to be_falsey
-          expect(book.errors.keys).to include(:author)
+          book = Book.new(title: title, authors_id: author_id)
+          expect(book.valid?).to be_truthy
         end
       end
 
-      context 'over 255 characters' do
-        let(:author) { 'x'*256 }
+      context 'under 255 characters with valid author_id' do
+        let(:title) { 'x'*254 }
 
         it 'is invalid' do
-          book = Book.new(author: author)
-          expect(book.valid?).to be_falsey
-          expect(book.errors.keys).to include(:author)
+          author = Author.create(f_name: 'f_name1', l_name: 'l_name1')
+          author_id = author.id
+          book = Book.new(title: title, authors_id: author_id)
+          expect(book.valid?).to be_truthy
         end
-      end
-    end
-
-    context 'author and title are valid' do
-      let(:author) { 'x'*255 }
-      let(:title) { 'x'*255 }
-
-      it 'is valid' do
-        book = Book.new(author: author, title: title)
-        expect(book.valid?).to be_truthy
       end
     end
   end
