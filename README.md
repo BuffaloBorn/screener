@@ -47,5 +47,4 @@ db/development.sqlite3`
 
 * Now we need to update the books#index method that returns the json response to include the from ```render  json: books``` to ```render :json => books.to_json(except: [:authors_id], :include => :author)```; __:include__ allows us to load nested relationships in a hash that can provided in the render phase of the instance variable.
 
-* In the spec folder modified spec/models/book_spec.rb, a new spec/models/author_spec.rb and revise version of spec/models/books_controller.rb. In the spec/models/book_spec.rb removed all references to author desired behaviors.
-And moved them to the spec/models/author_spec.rb and also made the need changes to spec/models/books_controller_spec.rb to use the new author model together with the modified book model.
+* In the spec folder, I've modified spec/models/book_spec.rb and spec/models/books_controller.rb plus added a new spec/models/author_spec.rb during author model generation. In the spec/models/book_spec.rb removed all references to author desired behaviors. And moved them to the spec/models/author_spec.rb and also made the necessary changes to spec/models/books_controller_spec.rb to use the new author model together with the modified book model.
