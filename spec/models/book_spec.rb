@@ -28,7 +28,7 @@ RSpec.describe 'Book' do
         let(:author_id) { nil }
 
         it 'is invalid' do
-          book = Book.new(title: title, authors_id: author_id)
+          book = Book.new(title: title, author_id: author_id)
           expect(book.valid?).to be_truthy
         end
       end
@@ -37,9 +37,8 @@ RSpec.describe 'Book' do
         let(:title) { 'x'*254 }
 
         it 'is invalid' do
-          author = Author.create(f_name: 'f_name1', l_name: 'l_name1')
-          author_id = author.id
-          book = Book.new(title: title, authors_id: author_id)
+          author = Author.create(name: 'second author')
+          book = Book.new(title: title, author_id: author.id)
           expect(book.valid?).to be_truthy
         end
       end

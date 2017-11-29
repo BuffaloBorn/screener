@@ -14,15 +14,14 @@
 ActiveRecord::Schema.define(:version => 20171128211937) do
 
   create_table "authors", :force => true do |t|
-    t.string   "f_name"
-    t.string   "l_name"
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "books", :force => true do |t|
     t.string  "title"
-    t.integer "authors_id"
+    t.integer "author_id"
   end
 
 end

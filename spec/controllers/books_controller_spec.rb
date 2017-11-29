@@ -13,16 +13,15 @@ RSpec.describe BooksController do
 
     context 'books' do
       it 'returns the found books' do
-        author = Author.create(f_name: 'f_name1', l_name: 'l_name1')
-        puts "author -> #{author.to_json}"
-        book = Book.create(title: "Test Title", authors_id: author.id)
-        puts "book -> #{book.to_json}"
+        author = Author.create(name: 'first author')
+        book = Book.create(title: "Test Title", author_id: author.id)
         get :index
-
+        author_created_at = Time.parse(author.created_at.to_s).iso8601
+        author_updated_at = Time.parse(author.updated_at.to_s).iso8601
         body = JSON.parse(response.body)
-        puts "body -> #{body}"
         expect(response.code).to eq("200")
-        expect(body).to eq([{ "name" => book.author.name, "id" => book.id, "title" => book.title }])
+        expect(body).to eq([{ "author_id"=> book.author_id,"id" => book.id, "title" => book.title, "author"=>{ "created_at"=> author_created_at, "id"=>author.id, "name" => author.name, "updated_at"=> author_updated_at} }]
+        )
       end
     end
   end
